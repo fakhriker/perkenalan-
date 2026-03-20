@@ -5,13 +5,29 @@ const codeText = `function introduce() {
   console.log("Hello, I'm " + name);
 }`;
 
-let i = 0;
-function typing() {
-  if (i < codeText.length) {
-    document.getElementById("code").textContent += codeText.charAt(i);
-    i++;
-    setTimeout(typing, 30);
+const codeElement = document.getElementById("code");
+
+let index = 0;
+let isDeleting = false;
+
+function typeLoop() {
+  if (!isDeleting) {
+    codeElement.textContent = codeText.substring(0, index++);
+    
+    if (index > codeText.length) {
+      isDeleting = true;
+      setTimeout(typeLoop, 4000);
+      return;
+    }
+  } else {
+    codeElement.textContent = codeText.substring(0, index--);
+    
+    if (index < 0) {
+      isDeleting = false;
+    }
   }
+
+  setTimeout(typeLoop, isDeleting ? 20 : 30);
 }
 
-typing();
+typeLoop();
