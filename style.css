@@ -110,3 +110,22 @@ pre {
     text-align: center;
   }
 }
+
+.code-text {
+  font-family: monospace;
+  color: #00f0ff;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Cursor kedip */
+.code-text::after {
+  content: "|";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
